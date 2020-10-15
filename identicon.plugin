@@ -1,0 +1,11 @@
+[Plugin]
+Module=identicon
+Depends=
+Loader=python3
+Name=identicon
+Description=Generates identicon avatars offline
+Authors=Alvar Penning
+Copyright=GPL-3.0-or-later
+Website=
+Help=
+Hidden=false
