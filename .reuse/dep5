@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: astroid-plugin-identicon
+Upstream-Contact: Alvar Penning <post@0x21.biz>
+Source: https://github.com/oxzi/astroid-plugin-identicon
+
+Files: identicon.plugin .gitignore README.md
+Copyright: 2020 Alvar Penning <post@0x21.biz>
+License: GPL-3.0-or-later

@@ -2,7 +2,7 @@
 Module=identicon
 Depends=
 Loader=python3
-Name=identicon
+Name=astroid-plugin-identicon
 Description=Generates identicon avatars offline
 Authors=Alvar Penning
 Copyright=GPL-3.0-or-later
