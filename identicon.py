@@ -16,15 +16,28 @@ class IdenticonPlugin(GObject.Object, Astroid.ThreadViewActivatable):
     web_view = GObject.property(type=WebKit2.WebView)
 
     def do_activate(self):
-        self.generator = pydenticon.Generator(5, 5)
+        foreground = ["rgb(45,79,255)",
+                      "rgb(254,180,44)",
+                      "rgb(226,121,234)",
+                      "rgb(30,179,253)",
+                      "rgb(232,77,65)",
+                      "rgb(49,203,115)",
+                      "rgb(141,69,170)"]
+        background = "rgba(255,255,255,0)"
+
+        self.generator = pydenticon.Generator(
+                rows=5, columns=5,
+                foreground=foreground, background=background)
 
     def do_deactivate(self):
         pass
 
     def do_get_avatar_uri(self, email, _type, size, _message):
-        img = self.generator.generate(email, size, size, output_format="jpeg")
+        img = self.generator.generate(
+                email, size, size, output_format="png", padding=(2, 2, 2, 2))
+
         img_base64 = base64.urlsafe_b64encode(img).decode("utf-8")
-        img_uri = f"data:image/jpeg;base64,{img_base64}"
+        img_uri = f"data:image/png;base64,{img_base64}"
 
         return img_uri
 
