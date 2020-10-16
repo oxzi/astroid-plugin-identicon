@@ -11,6 +11,7 @@ gi.require_version('WebKit2', '4.0')
 from gi.repository import GObject, Astroid, Gtk, WebKit2
 
 import base64
+import functools
 import pydenticon
 
 
@@ -36,7 +37,8 @@ class IdenticonPlugin(GObject.Object, Astroid.ThreadViewActivatable):
     def do_deactivate(self):
         pass
 
-    def do_get_avatar_uri(self, email, _type, size, _message):
+    @functools.lru_cache(maxsize=512)
+    def _create_identicon(self, email, size):
         img = self.generator.generate(
                 email, size, size, output_format="png", padding=(2, 2, 2, 2))
 
@@ -44,6 +46,9 @@ class IdenticonPlugin(GObject.Object, Astroid.ThreadViewActivatable):
         img_uri = f"data:image/png;base64,{img_base64}"
 
         return img_uri
+
+    def do_get_avatar_uri(self, email, _type, size, _message):
+        return self._create_identicon(email, size)
 
     def do_get_allowed_uris(self):
         return []
