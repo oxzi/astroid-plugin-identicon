@@ -48,7 +48,7 @@ class IdenticonPlugin(GObject.Object, Astroid.ThreadViewActivatable):
         return img_uri
 
     def do_get_avatar_uri(self, email, _type, size, _message):
-        return self._create_identicon(email, size)
+        return self._create_identicon(email.lower(), size)
 
     def do_get_allowed_uris(self):
         return []
